@@ -1,30 +1,26 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    app: './src/app.js',
+    app: './src/index.js',
   },
   devtool: "source-map",
   devServer: {
     historyApiFallback: true,
-    contentBase: path.join(__dirname, "build"),
-    hot: true
+    contentBase: path.join(__dirname, "build")
   },
   plugins: [
-    new CleanWebpackPlugin(['build']),
-    new webpack.HotModuleReplacementPlugin(),
+    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'Output Management',
       minify: {
         collapseWhitespace: true
       },
-      hash: true,
       template: './src/index.html'
-    }),
-    new webpack.HotModuleReplacementPlugin()
+    })
   ],
   output: {
     filename: '[name].bundle.js',
